@@ -69,7 +69,7 @@ console.log(`Books available: ${fictionSection.getAvailableBooks()}`);
 
 class Patron { // library users
     constructor(name){
-        this.patron = patron; // patron names
+        this.name = name; // patron names
         this.booksBorrowed = []; // array to keep borrowed books
     }
 
@@ -100,3 +100,22 @@ class Patron { // library users
 const patron1 = new Patron ("Alice");
 patron1.borrowBook(book1);
 patron1.returnBook(book1);
+
+// Task 4 -  Create a VIPPatron Class that Inherits from Patron
+
+class VIPPatron{
+    constructor(name){
+        super(name); // calls constructor from parent class (patron)
+        this.priority = true; 
+    }
+
+    borrowBook(book){
+        if (book.isAvailable){
+            super.borrowBook(book);
+        } else{
+            console.log(`"${book.title}" is currently unavailable for VIP patron ${this.name}.`);
+        }
+    }
+}; 
+
+

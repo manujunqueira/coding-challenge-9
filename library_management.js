@@ -22,12 +22,6 @@ set isAvailable(status){ // setter to change book availability
 
 };
 
-// example
-
-const book1 = new Book("Moby-Dick", "Herman Melville", "1234567890"); // adding a book
-console.log (book1.getDetails()); // log the details and availability 
-console.log (book1._isAvailable); // "true"
-
 
 // Task 2 - Create a Section Class
 
@@ -58,17 +52,6 @@ class Section {
         return this.books.filter(book => book.isAvailable).length;
     }
 }
-
-// example 
-
-const fictionSection = new Section ("Fiction");
-const book2 = new Book ("Dracula", "Bram Stocker", "7399467")
-
-fictionSection.addBook(book1);
-fictionSection.addBook(book2);
-
-fictionSection.listBooks();
-console.log(`Books available: ${fictionSection.getAvailableBooks()}`);
 
 
 // Task 3 - Create a Patron Class
@@ -103,9 +86,6 @@ class Patron { // library users
 
 // example 
 
-const patron1 = new Patron ("Alice");
-patron1.borrowBook(book1);
-patron1.returnBook(book1);
 
 // Task 4 -  Create a VIPPatron Class that Inherits from Patron
 
@@ -123,3 +103,58 @@ class VIPPatron extends Patron{
         }
     }
 }; 
+
+// Task 6 - Create and Manage Sections and Patrons
+
+const library = new Library();
+
+// sections
+const fictionSection = new Section ("Fiction");
+const nonFictionSection = new Section ("Non-Fiction");
+
+library.addSection(fictionSection);
+library.addSection(nonFictionSection);
+
+// books
+const book1 = new Book("Moby-Dick", "Herman Melville", "1234567890"); 
+const book2 = new Book ("Dracula", "Bram Stocker", "7399467");
+const book3 = new Book ("The Diary of a Young Girl", "Anne Frank", "7849334");
+const book4 = new Book ("Silent Spring", "Rachel Carson", "99093747");
+
+fictionSection.addBook(book1);
+fictionSection.addBook(book2);
+nonFictionSection.addBook(book3);
+nonFictionSection.addBook(book4); 
+
+// patrons
+const patron1 = new Patron ("Alice");
+const patron2 = new Patron ("Ana");
+const vipPatron = new VIPPatron ("Bob");
+
+// available books 
+console.log(`Books available before borrowing:`);
+fictionSection.listBooks();
+nonFictionSection.listBooks();
+console.log(`Total available in Fiction: ${fictionSection.calculateTotalBooksAvailable()}`);
+console.log(`Total available in Non-Fiction: ${nonFictionSection.calculateTotalBooksAvailable()}`);
+
+// patron borrowing a book 
+library.borrowBook("Alice", "Fiction", "Moby-Dick");
+
+// vip patron borrowing same book 
+library.borrowBook("Bob", "Fiction", "Moby-Dick");
+
+// available books after borrowing
+console.log("\nBooks available after borrowing:");
+fictionSection.listBooks();
+console.log(`Total available in Fiction: ${fictionSection.calculateTotalBooksAvailable()}`);
+console.log(`Total available in Non-Fiction: ${nonFictionSection.calculateTotalBooksAvailable()}`);
+
+// Bob returns book
+library.returnBook("Bob", "Moby-Dick");
+
+// available books after returnings
+console.log("\nBooks available after returning:");
+fictionSection.listBooks();
+console.log(`Total available in Fiction: ${fictionSection.calculateTotalBooksAvailable()}`);
+console.log(`Total available in Non-Fiction: ${nonFictionSection.calculateTotalBooksAvailable()}`);

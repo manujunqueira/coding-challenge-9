@@ -63,3 +63,40 @@ fictionSection.addBook(book2);
 
 fictionSection.listBooks();
 console.log(`Books available: ${fictionSection.getAvailableBooks()}`);
+
+
+// Task 3 - Create a Patron Class
+
+class Patron { // library users
+    constructor(name){
+        this.patron = patron; // patron names
+        this.booksBorrowed = []; // array to keep borrowed books
+    }
+
+    borrowBook(book){ // allow patron to borrow book, if available 
+        if (book.isAvailable){
+            this.booksBorrowed.push(book);
+            book.isAvailable = false;  // checks book as unavailable 
+            console.log(`${this.name} borrowed "${book.title}".`);
+        } else {
+            console.log(`"${book.title}" is currently unavailable.`);
+        }
+    }
+
+    returnBook(book){ // verify if book is on the borrowed list
+        const bookIndex = this.booksBorrowed.indexOf(book);
+        if (bookIndex !== -1){ // removes book from borrowed list
+            this.booksBorrowed.splice(bookIndex, 1);
+            book.isAvailable = true; // marks book as available 
+            console.log(`${this.name} returned "${book.title}".`); // confirmation message
+        } else{
+            console.log(`${this.name} has not borrowed "${book.title}".`); // message if patron did not borrow the book
+        }
+    }
+};
+
+// example 
+
+const patron1 = new Patron ("Alice");
+patron1.borrowBook(book1);
+patron1.returnBook(book1);

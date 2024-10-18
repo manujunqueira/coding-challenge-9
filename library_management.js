@@ -84,8 +84,6 @@ class Patron { // library users
     }
 };
 
-// example 
-
 
 // Task 4 -  Create a VIPPatron Class that Inherits from Patron
 
@@ -106,14 +104,9 @@ class VIPPatron extends Patron{
 
 // Task 6 - Create and Manage Sections and Patrons
 
-const library = new Library();
-
 // sections
 const fictionSection = new Section ("Fiction");
 const nonFictionSection = new Section ("Non-Fiction");
-
-library.addSection(fictionSection);
-library.addSection(nonFictionSection);
 
 // books
 const book1 = new Book("Moby-Dick", "Herman Melville", "1234567890"); 
@@ -139,10 +132,10 @@ console.log(`Total available in Fiction: ${fictionSection.calculateTotalBooksAva
 console.log(`Total available in Non-Fiction: ${nonFictionSection.calculateTotalBooksAvailable()}`);
 
 // patron borrowing a book 
-library.borrowBook("Alice", "Fiction", "Moby-Dick");
+patron1.borrowBook(book1);
 
 // vip patron borrowing same book 
-library.borrowBook("Bob", "Fiction", "Moby-Dick");
+vipPatron.borrowBook(book1);
 
 // available books after borrowing
 console.log("\nBooks available after borrowing:");
@@ -151,7 +144,7 @@ console.log(`Total available in Fiction: ${fictionSection.calculateTotalBooksAva
 console.log(`Total available in Non-Fiction: ${nonFictionSection.calculateTotalBooksAvailable()}`);
 
 // Bob returns book
-library.returnBook("Bob", "Moby-Dick");
+patron1.returnBook(book1);
 
 // available books after returnings
 console.log("\nBooks available after returning:");
